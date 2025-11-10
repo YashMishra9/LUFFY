@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Queue Manager</title>
+  <link href="https://fonts.cdnfonts.com/css/norwester" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+     
+      font-family: 'Norwester', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #f4f6fb;
+      color: #333;
+    }
+
+    /* ===== NAVBAR ===== */
+    header {
+      width: 100%;
+      background: linear-gradient(90deg, #0052cc, #0078ff);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav ul li a {
+    font-family: 'Norwester', sans-serif;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    font-size: 1rem;
+    transition: 0.3s;
+    position: relative;
+    }
+
+
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background: #ffd700;
+      bottom: -5px;
+      left: 0;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    nav ul li a:hover {
+      color: #ffd700;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10%;
+      background: linear-gradient(135deg, #0078ff, #66ccff);
+      color: white;
+      flex-wrap: wrap;
+    }
+
+    .hero-text {
+      max-width: 520px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .hero-text h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      margin-bottom: 35px;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .hero-buttons button {
+      background: #ffd700;
+      color: #004aad;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+    }
+
+    .hero-buttons button:hover {
+      background: white;
+      color: #0078ff;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ===== FEATURES ===== */
+    .features {
+      padding: 100px 10%;
+      background: #ffffff;
+      text-align: center;
+    }
+
+    .features h2 {
+      margin-bottom: 50px;
+      font-size: 2.2rem;
+      color: #004aad;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .feature {
+      background: linear-gradient(145deg, #f5f7fa, #e4ebf5);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .feature:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .feature span {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    /* ===== TECHNOLOGY ===== */
+    .technology {
+      padding: 100px 10%;
+      background: #eaf3ff;
+      text-align: center;
+    }
+
+    .technology h2 {
+      margin-bottom: 30px;
+      font-size: 2rem;
+      color: #004aad;
+    }
+
+    .tech-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .tech-card {
+      background: white;
+      padding: 25px 40px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .tech-card:hover {
+      background: #0078ff;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .flowchart {
+      margin-top: 50px;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      display: inline-block;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      font-weight: 500;
+    }
+
+    .flowchart div {
+      margin: 8px 0;
+    }
+
+    .arrow {
+      color: #0078ff;
+      font-weight: bold;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      padding: 100px 10%;
+      text-align: center;
+      background: #f8f9ff;
+    }
+
+    .contact h2 {
+      margin-bottom: 25px;
+      font-size: 2rem;
+      color: #004aad;
+    }
+
+    .contact form {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 35px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact input,
+    .contact textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .contact button {
+      background: #0078ff;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .contact button:hover {
+      background: #ffd700;
+      color: black;
+      transform: scale(1.05);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: linear-gradient(90deg, #004aad, #0078ff);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image img {
+  width: 380px;
+  max-width: 90%;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header>
+    <h1>Smart Queue Manager</h1>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#tech">Technology</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== HERO ===== -->
+ <section class="hero" id="home">
+  <div class="hero-text">
+    <h2>Revolutionizing the Way You Wait</h2>
+    <p>Smart Queue Manager leverages AI and IoT to optimize queues, reduce waiting time, and enhance user experience across hospitals, banks, and public service centers.</p>
+    <div class="hero-buttons">
+      <button>Take Token</button>
+      <button>Serve Next</button>
+      <button>Notify Near Turn</button>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src="https://cdn-icons-png.flaticon.com/512/7437/7437649.png" alt="Smart Queue Manager Logo">
+  </div>
+</section>
+
+
+  <!-- ===== FEATURES ===== -->
+  <section class="features" id="features">
+    <h2>Core Features</h2>
+    <div class="feature-grid">
+      <div class="feature"><span>🎟️</span>Digital Token System</div>
+      <div class="feature"><span>⏱️</span>Real-Time Queue Updates</div>
+      <div class="feature"><span>📲</span>Instant Mobile Notifications</div>
+      <div class="feature"><span>🤖</span>AI-Powered Predictions</div>
+      <div class="feature"><span>📊</span>Analytics Dashboard</div>
+      <div class="feature"><span>🚨</span>Priority Service Management</div>
+    </div>
+  </section>
+
+  <!-- ===== TECHNOLOGY ===== -->
+  <section class="technology" id="tech">
+    <h2>Technology Used</h2>
+    <div class="tech-grid">
+      <div class="tech-card">AI Algorithms</div>
+      <div class="tech-card">IoT Sensors</div>
+      <div class="tech-card">Cloud Database</div>
+    </div>
+
+    <div class="flowchart">
+      <div>👤 User</div>
+      <div class="arrow">↓</div>
+      <div>🎟️ Token Issued</div>
+      <div class="arrow">↓</div>
+      <div>🤖 AI Time Prediction</div>
+      <div class="arrow">↓</div>
+      <div>📺 Display Queue</div>
+      <div class="arrow">↓</div>
+      <div>📲 Mobile Notification</div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="4" placeholder="Your Message"></textarea>
+      <button>Send Message</button>
+    </form>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    © 2025 Smart Queue Manager | Designed for Design Thinking Project
+  </footer>
+
+</body>
+</html>
+
